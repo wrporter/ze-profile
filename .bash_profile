@@ -81,9 +81,8 @@ function color_terminal {
     local current_location="${YELLOW}\w"
     export PS1="${user_and_host}${current_location}${off}$ "
     export CLICOLOR=1
-	export LSCOLORS=ExFxBxDxCxegedabagacad
+    export LSCOLORS=ExFxBxDxCxegedabagacad
 }
-
-color_terminal()
+color_terminal
 
 ###########################################################
