@@ -75,13 +75,19 @@ on_PURPLE="\[\e[10;95m\]"
 on_CYAN="\[\e[0;106m\]"
 on_WHITE="\[\e[0;107m\]"
 
+function parse_git_branch {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 function color_terminal {
     local user_and_host="${green}\u${cyan}@${purple}\h${cyan}:"
-    local current_location="${Blue}\w"
-    export PS1="${user_and_host}${current_location}${off}$ "
+    local current_location="${Yellow}\w"
+    local prompt="${off}$ "
+    export PS1="${user_and_host}${current_location}${git_branch}${Blue}\$(parse_git_branch)${prompt}"
     export CLICOLOR=1
     export LSCOLORS=ExFxBxDxCxegedabagacad
 }
+
 color_terminal
 
 ###########################################################
