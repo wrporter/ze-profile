@@ -1,0 +1,42 @@
+# Allow for custom ssh configurations.
+Include ~/.ssh/*.config
+
+# Ignore the following options if they are unknown to this build of OpenSSH.
+IgnoreUnknown AddKeysToAgent,UseKeychain
+
+# Default identity.
+IdentityFile ~/.ssh/id_rsa
+
+# Forward key-based authentication to ssh-agent,
+# because private keys do not exist on data center hosts.
+ForwardAgent yes
+# Automatically add keys to the SSH agent.
+AddKeysToAgent yes
+# Integrate with MacOS X keychain.
+UseKeychain yes
+
+# Multiplex multiple SSH sessions over same connection.
+# Removes need to answer TFA challenge every time.
+ControlMaster auto
+ControlPath ~/.ssh/.run/session-%C
+ControlPersist 5d
+
+# Notice dead connections quickly and terminate them.
+# Useful for reaping dead control master connections.
+ServerAliveInterval 15
+ServerAliveCountMax 4
+
+# Fail fast on connection timeouts.
+# If we are taking a long time, we probably don't want to login anyway.
+# This can be overriden on the command line, if necessary.
+ConnectTimeout 15
+
+# If a forward or tunnel cannot be established, actually let someone know.
+# Easier to debug if the failure mode is known.
+ExitOnForwardFailure yes
+
+Host x-wing
+    HostName sunbeam.cf
+    Port 22
+    User x-wing
+    IdentityFile ~/.ssh/id_rsa
