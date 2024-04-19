@@ -5,6 +5,7 @@ Include ~/.ssh/*.config
 IgnoreUnknown AddKeysToAgent,UseKeychain
 
 # Default identity.
+User wesp
 IdentityFile ~/.ssh/id_rsa
 
 # Forward key-based authentication to ssh-agent,
@@ -35,8 +36,10 @@ ConnectTimeout 15
 # Easier to debug if the failure mode is known.
 ExitOnForwardFailure yes
 
-Host x-wing
-    HostName sunbeam.cf
-    Port 22
-    User x-wing
-    IdentityFile ~/.ssh/id_rsa
+Host roshar
+    HostName ssh.epicbits.dev
+    ProxyCommand cloudflared access ssh --hostname %h
+
+Host roshar-internal
+    HostName 192.168.1.222
+    Port 2614
