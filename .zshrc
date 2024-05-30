@@ -1,7 +1,7 @@
 ###########################################################
 # ZSH Config
 
-export ZSH="~/.oh-my-zsh"
+export ZSH=~/.oh-my-zsh
 ZSH_THEME="wesp"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
@@ -13,6 +13,10 @@ alias src='source ~/.zshrc'
 
 alias ls='ls -GFh'
 alias ll='ls -GFhla'
+
+function idea() {
+	open -na "IntelliJ IDEA.app" --args "$@"
+}
 
 ###########################################################
 # Docker
@@ -37,6 +41,11 @@ alias gitUndoLastCommitSoft='git reset --soft HEAD~1'
 alias gitUndoLastCommitHard='git reset --hard HEAD~1'
 
 ###########################################################
+# Editors
+
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+
+###########################################################
 # SSH
 
 function clear_host() {
@@ -48,12 +57,5 @@ function clear_host() {
 
 export CURRENT_INTERFACE=`route get 10.10.10.10 | grep interface | awk '{print $2}'`
 export CURRENT_IP=`(ifconfig $CURRENT_INTERFACE 2>/dev/null) | grep "inet " | awk '{print $2}' | head -n 1`
-
-###########################################################
-# Go
-
-export GOPATH=~/code
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH
 
 ###########################################################
